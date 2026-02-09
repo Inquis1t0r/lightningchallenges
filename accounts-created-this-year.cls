@@ -1,5 +1,14 @@
 public static List<String> getAccountsCreatedThisYear() {
-	// Write your SOQL query here to get Account names created this year
-	// Use the THIS_YEAR date literal and order by Name
-	return new List<String>();
+    List<String> accountNames = new List<String>();
+
+    for (Account acc : [
+        SELECT Name
+        FROM Account
+        WHERE CreatedDate = THIS_YEAR
+        ORDER BY Name
+    ]) {
+        accountNames.add(acc.Name);
+    }
+
+    return accountNames;
 }
